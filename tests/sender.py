@@ -12,7 +12,7 @@ def load_json_file(file_path):
 
 # Example usage
 if __name__ == "__main__":
-    url = "http://13.60.13.42:8080/payload"
+    url = "http://16.171.199.78:8080/payload"
     file_path = "C:\\Users\\Moran\\repos\\home-exam\\tests\\example_missing_key.json"
     payload = load_json_file(file_path)
     status_code, response = send_payload(url, payload)
