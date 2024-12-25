@@ -12,8 +12,8 @@ def load_json_file(file_path):
 
 # Example usage
 if __name__ == "__main__":
-    url = "http://13.48.28.199/:8080/payload"
-    file_path = "C:\\Users\\Moran\\repos\\home-exam\\tests\\example_missing_key.json"
+    url = "http://13.61.5.154:8080//payload"
+    file_path = "C:\\Users\\Moran\\repos\\home-exam\\tests\\example_no_token.json"
     payload = load_json_file(file_path)
     status_code, response = send_payload(url, payload)
     print(f"Status Code: {status_code}")

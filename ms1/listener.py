@@ -1,7 +1,11 @@
 from flask import Flask, request, jsonify
-from json import dumps, loads
-from marshmallow import Schema, fields, ValidationError
+#from json import dumps, loads
+from marshmallow import Schema, fields, ValidationError, validate
+import os
+
 #from flask_restful import Resource, Api
+
+env_token = os.environ["secret_token"]
 
 class DataSchema(Schema):
     email_subject = fields.String(required=True)
@@ -11,7 +15,7 @@ class DataSchema(Schema):
 
 class PayloadSchema(Schema):
     data = fields.Nested(DataSchema, required=True)
-    token = fields.String(required=True)
+    token = fields.String(validate=validate.Equal(env_token), required=True)
     
 app = Flask(__name__)
 
