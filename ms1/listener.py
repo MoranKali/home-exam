@@ -3,18 +3,22 @@ from json import dumps, loads
 from marshmallow import Schema, fields, ValidationError
 #from flask_restful import Resource, Api
 
-class PayloadSchema(Schema):
+class DataSchema(Schema):
     email_subject = fields.String(required=True)
     email_sender = fields.String(required=True)
     email_timestream = fields.String(required=True)
     email_content = fields.String(required=True)
+
+class PayloadSchema(Schema):
+    data = fields.Nested(DataSchema, required=True)
+    token = fields.String(required=True)
     
 app = Flask(__name__)
 
 @app.route('/health', methods=['GET'])
 @app.route('/payload', methods=['POST'])
 def get_payload():
-    data = request.json()
+    data = request.get_json()
     schema=PayloadSchema()
     if data:
         # add tests and send to sqs
