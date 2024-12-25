@@ -14,7 +14,7 @@ app = Flask(__name__)
 @app.route('/health', methods=['GET'])
 @app.route('/payload', methods=['POST'])
 def get_payload():
-    data = request.get_json()
+    data = request.json()
     schema=PayloadSchema()
     if data:
         # add tests and send to sqs
