@@ -1,5 +1,5 @@
 # Define the API endpoint URL
-$Url = "http://13.60.104.184:8080/payload"
+$Url = "http://16.170.234.25:8080/payload"
 
 # Path to the JSON file
 $JsonFilePath = "C:\Users\Moran\repos\home-exam\tests\example.json"
