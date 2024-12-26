@@ -58,7 +58,8 @@ def delete_message(message):
         raise error
 
 if __name__ == '__main__':
-    messages = receive_messages(queue, 10, 20)
-    for msg in messages:
-        # s3.Object(bucket_name, msg.message_id).put(Body=msg.body)
-        delete_message(msg)
+    logger.info("started")
+    # messages = receive_messages(queue, 1, 20)
+    # for msg in messages:
+    #     # s3.Object(bucket_name, msg.message_id).put(Body=msg.body)
+    #     delete_message(msg)
