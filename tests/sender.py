@@ -14,7 +14,7 @@ def load_json_file(file_path):
 
 # Example usage
 if __name__ == "__main__":
-    url = "http://13.61.4.219:8080/payload"
+    url = "http://13.49.70.219:8080/payload"
     file_path = "C:\\Users\\Moran\\repos\\home-exam\\tests\\example.json"
     payload = load_json_file(file_path)
     payload_str=json.dumps(payload)

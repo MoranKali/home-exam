@@ -14,9 +14,9 @@ aws_secret_access_key = os.environ["secret_access_key"]
 
 logger = logging.getLogger(__name__)
 sqs = boto3.resource("sqs", region_name="eu-north-1", aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
-queue = sqs.get_queue_by_name(QueueName="myQueue.fifo")
+queue = sqs.get_queue_by_name(QueueName="StandardQueue")
 AWS_REGION = 'eu-north-1'
-QUEUE_URL = 'https://sqs.eu-north-1.amazonaws.com/248189902862/myQueue.fifo'
+QUEUE_URL = 'https://sqs.eu-north-1.amazonaws.com/248189902862/StandardQueue'
 
 sqs_client = boto3.client("sqs", region_name=AWS_REGION)
 
