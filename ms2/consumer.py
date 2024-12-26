@@ -6,6 +6,10 @@ aws_access_key_id = os.environ["aws_access_key"]
 aws_secret_access_key = os.environ["secret_access_key"]
 sqs = boto3.resource("sqs", region_name="eu-north-1", aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
 
+s3 = boto3.resource('s3', region_name='eu-north-1', aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
+s3_client = boto3.client('s3', region_name='eu-north-1')
+bucket_name = "248189902862-messages"
+
 sqs_queue = sqs.get_queue_by_name(QueueName="StandardQueue")
 
 logger = logging.getLogger(__name__)
@@ -13,6 +17,7 @@ logger = logging.getLogger(__name__)
 def process_message(message_body):
     print(f"processing message: {message_body}")
     # do what you want with the message here
+    s3.Object(bucket_name).put(Body=message_body)
     logger.warning("Message processed: %s", message_body)
     pass
 
