@@ -2,8 +2,14 @@ from flask import Flask, request, jsonify
 #from json import dumps, loads
 from marshmallow import Schema, fields, ValidationError, validate
 import os
-
+import boto3
+import producer
 #from flask_restful import Resource, Api
+
+AWS_REGION = 'eu-north-1'
+QUEUE_URL = 'https://sqs.eu-north-1.amazonaws.com/248189902862/myQueue.fifo'
+
+sqs_client = boto3.client("sqs", region_name=AWS_REGION)
 
 env_token = os.environ["secret_token"]
 
@@ -30,9 +36,10 @@ def get_payload():
     if data:
         # add tests and send to sqs
         try:
-            schema.load(data)
+            schema.load(QUEUE_URL,data)
         except ValidationError as err:
             return jsonify({"status": "error", "message": err.messages}), 400
+        producer.send_queue_message(data)
         return jsonify({"status": "success", "data": data}), 200
     else:
         return jsonify({"status": "error", "message": "No payload received"}), 400
