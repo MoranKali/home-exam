@@ -1,6 +1,7 @@
 import boto3
 import os
 import logging
+import time
 
 aws_access_key_id = os.environ["aws_access_key"]
 aws_secret_access_key = os.environ["secret_access_key"]
@@ -17,7 +18,7 @@ logger = logging.getLogger(__name__)
 def process_message(message_body):
     print(f"processing message: {message_body}")
     # do what you want with the message here
-    s3.Object(bucket_name, message.message_id).put(Body=message_body)
+    s3.Object(bucket_name, time.time).put(Body=message_body)
     logger.warning("Message processed: %s", message_body)
     pass
 
