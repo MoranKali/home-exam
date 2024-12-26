@@ -5,7 +5,7 @@ aws_access_key_id = os.environ["aws_access_key"]
 aws_secret_access_key = os.environ["secret_access_key"]
 sqs = boto3.resource("sqs", region_name="eu-north-1", aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
 
-queue = sqs.get_queue_by_name(QueueName="StandardQueue")
+sqs_queue = sqs.get_queue_by_name(QueueName="StandardQueue")
 
 def process_message(message_body):
     print(f"processing message: {sqs_message}")
