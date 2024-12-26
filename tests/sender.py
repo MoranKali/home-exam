@@ -14,7 +14,7 @@ def load_json_file(file_path):
 
 # Example usage
 if __name__ == "__main__":
-    url = "http://51.20.34.48/:8080/payload"
+    url = "http://alb-1-1307571666.eu-north-1.elb.amazonaws.com:8080/payload"
     file_path = "C:\\Users\\Moran\\repos\\home-exam\\tests\\example_wrong_keys.json"
     payload = load_json_file(file_path)
     status_code, response = send_payload(url, payload)
