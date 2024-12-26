@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 def process_message(message_body):
     print(f"processing message: {message_body}")
     # do what you want with the message here
-    logger.info("Message processed: %s", message_body)
+    logger.warning("Message processed: %s", message_body)
     pass
 
 if __name__ == "__main__":
