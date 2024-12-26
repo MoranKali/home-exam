@@ -1,6 +1,6 @@
 import logging
 import boto3
-from botocore.ex5ceptions import ClientError
+#from botocore.exceptions import ClientError
 import json
 AWS_REGION = 'eu-north-1'
 # logger config
@@ -17,7 +17,7 @@ def send_queue_message(queue_url, msg_body):
         response = sqs_client.send_message(QueueUrl=queue_url,
                                         #    MessageAttributes=msg_attributes,
                                            MessageBody=msg_body)
-    except ClientError:
+    except sqs_client.exceptions.QueueDoesNotExist:
         logger.exception(f'Could not send meessage to the - {queue_url}.')
         raise
     else:
