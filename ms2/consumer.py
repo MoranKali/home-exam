@@ -8,7 +8,7 @@ sqs = boto3.resource("sqs", region_name="eu-north-1", aws_access_key_id=aws_acce
 sqs_queue = sqs.get_queue_by_name(QueueName="StandardQueue")
 
 def process_message(message_body):
-    print(f"processing message: {sqs_message}")
+    print(f"processing message: {message_body}")
     # do what you want with the message here
     pass
 
