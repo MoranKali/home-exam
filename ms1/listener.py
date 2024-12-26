@@ -20,6 +20,9 @@ class PayloadSchema(Schema):
 app = Flask(__name__)
 
 @app.route('/health', methods=['GET'])
+def health():
+    return jsonify({"status": "healthy"}), 200
+
 @app.route('/payload', methods=['POST'])
 def get_payload():
     data = request.get_json()
