@@ -60,5 +60,5 @@ def delete_message(message):
 if __name__ == '__main__':
     messages = receive_messages(queue, 10, 20)
     for msg in messages:
-        s3.Object(bucket_name, msg.message_id).put(Body=msg.body)
+        # s3.Object(bucket_name, msg.message_id).put(Body=msg.body)
         delete_message(msg)
