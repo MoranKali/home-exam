@@ -39,7 +39,8 @@ def get_payload():
             schema.load(QUEUE_URL,data)
         except ValidationError as err:
             return jsonify({"status": "error", "message": err.messages}), 400
-        producer.send_queue_message(data)
+        sqs_response=producer.send_queue_message(data)
+        print(f"SQS Response: {sqs_response}")
         return jsonify({"status": "success", "data": data}), 200
     else:
         return jsonify({"status": "error", "message": "No payload received"}), 400
