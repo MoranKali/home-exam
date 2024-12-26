@@ -24,7 +24,7 @@
 #    See the documentation for each action used below for the recommended IAM policies for this IAM user,
 #    and best practices on handling the access key credentials.
 
-name: Deploy to Amazon ECS
+name: Deploy ms2 Amazon ECS
 
 on:
   push:
@@ -35,9 +35,9 @@ on:
 env:
   AWS_REGION: eu-north-1                               # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: main/ms2                            # set this to your Amazon ECR repository name
-  # ECS_SERVICE: consumer                         # set this to your Amazon ECS service name
+  ECS_SERVICE: consumer                         # set this to your Amazon ECS service name
   # ECS_CLUSTER: demo                         # set this to your Amazon ECS cluster name
-  # ECS_TASK_DEFINITION: infra/listener-revision1.json  # set this to the path to your Amazon ECS task definition
+  ECS_TASK_DEFINITION: infra/consumer-revision1.json  # set this to the path to your Amazon ECS task definition
                                                        # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: ms2                           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
