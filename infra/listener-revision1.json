@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:eu-north-1:248189902862:task-definition/listener:7",
+    "taskDefinitionArn": "arn:aws:ecs:eu-north-1:248189902862:task-definition/listener:6",
     "containerDefinitions": [
         {
             "name": "ms1",
@@ -40,8 +40,7 @@
                     "max-buffer-size": "25m",
                     "awslogs-region": "eu-north-1",
                     "awslogs-stream-prefix": "ecs"
-                },
-                "secretOptions": []
+                }
             },
             "systemControls": []
         }
@@ -49,7 +48,7 @@
     "family": "listener",
     "executionRoleArn": "arn:aws:iam::248189902862:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 7,
+    "revision": 6,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -70,9 +69,6 @@
         },
         {
             "name": "ecs.capability.execution-role-ecr-pull"
-        },
-        {
-            "name": "ecs.capability.secrets.ssm.environment-variables"
         },
         {
             "name": "ecs.capability.extensible-ephemeral-storage"
@@ -104,7 +100,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-12-25T23:32:12.131Z",
+    "registeredAt": "2024-12-25T22:59:04.781Z",
     "registeredBy": "arn:aws:iam::248189902862:root",
     "tags": []
 }
