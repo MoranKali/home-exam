@@ -29,6 +29,14 @@
                 {
                     "name": "secret_token",
                     "valueFrom": "arn:aws:ssm:eu-north-1:248189902862:parameter/secret_token"
+                },
+                {
+                    "name": "aws_access_key",
+                    "valueFrom": "arn:aws:ssm:eu-north-1:248189902862:parameter/access_key"
+                },
+                {
+                    "name": "secret_access_key",
+                    "valueFrom": "arn:aws:ssm:eu-north-1:248189902862:parameter/secret_access_key"
                 }
             ],
             "logConfiguration": {
