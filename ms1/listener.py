@@ -15,7 +15,7 @@ class DataSchema(Schema):
 
 class PayloadSchema(Schema):
     data = fields.Nested(DataSchema, required=True)
-    token = fields.String(validate=validate.Equal(env_token,errpr='Incorrect Token'), required=True)
+    token = fields.String(validate=validate.Equal(env_token,error='Incorrect Token'), required=True)
     
 app = Flask(__name__)
 
