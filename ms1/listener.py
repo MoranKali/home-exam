@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from json import dumps, loads
+import json
 from marshmallow import Schema, fields, ValidationError, validate
 import os
 import logging
