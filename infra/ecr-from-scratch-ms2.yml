@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  This template creates an ECR repository.
+Resources:
+  ecrRepository3:
+    Type: AWS::ECR::Repository
+    Properties:
+      EmptyOnDelete: false
+      EncryptionConfiguration:
+        EncryptionType: "AES256"
+      ImageScanningConfiguration:
+        ScanOnPush: false
+      ImageTagMutability: "MUTABLE"
+      RepositoryName: "main/ms1"
+
+      

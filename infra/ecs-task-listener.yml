@@ -1,0 +1,85 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  IAMAWSRoleServiceRoleForECS:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::IAM::Role"
+    DeletionPolicy: "Retain"
+    Properties:
+      ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/aws-service-role/AmazonECSServiceRolePolicy"
+      RoleName: "AWSServiceRoleForECS"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Action: "sts:AssumeRole"
+          Effect: "Allow"
+          Principal:
+            Service: "ecs.amazonaws.com"
+  ecsTaskExecutionRole:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::IAM::Role"
+    DeletionPolicy: "Retain"
+    Properties:
+      ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+      - "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
+      MaxSessionDuration: 3600
+      RoleName: "ecsTaskExecutionRole"
+      AssumeRolePolicyDocument:
+        Version: "2008-10-17"
+        Statement:
+        - Action: "sts:AssumeRole"
+          Effect: "Allow"
+          Principal:
+            Service: "ecs.amazonaws.com"
+          Sid: ""
+  ECSTaskDefinitionlistenerCF:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::ECS::TaskDefinition"
+    DeletionPolicy: "Retain"
+    Properties:
+      Memory: "2048"
+      Cpu: "1024"
+      RequiresCompatibilities:
+      - "FARGATE"
+      NetworkMode: "awsvpc"
+      EnableFaultInjection: false
+      ExecutionRoleArn:
+        Fn::GetAtt:
+        - "ecsTaskExecutionRole"
+        - "Arn"
+      RuntimePlatform:
+        OperatingSystemFamily: "LINUX"
+        CpuArchitecture: "X86_64"
+      ContainerDefinitions:
+      - ExtraHosts: []
+        Secrets:
+        - ValueFrom: "arn:aws:ssm:eu-north-1:248189902862:parameter/secret_token"
+          Name: "secret_token"
+        - ValueFrom: "arn:aws:ssm:eu-north-1:248189902862:parameter/access_key"
+          Name: "aws_access_key"
+        - ValueFrom: "arn:aws:ssm:eu-north-1:248189902862:parameter/secret_access_key"
+          Name: "secret_access_key"
+        # parameterize the image
+        Image: "248189902862.dkr.ecr.eu-north-1.amazonaws.com/main/ms1:e52ebc029da65e9c5226dbd9cc7b55ae3aec119e"
+        Essential: true
+        LogConfiguration:
+          Options:
+            awslogs-group: "/ecs/listener"
+            mode: "non-blocking"
+            max-buffer-size: "25m"
+            awslogs-create-group: "true"
+            awslogs-region: "eu-north-1"
+            awslogs-stream-prefix: "ecs"
+          LogDriver: "awslogs"
+        Name: "ms1-cf"
+        PortMappings:
+        - ContainerPort: 8080
+          AppProtocol: "http"
+          Protocol: "tcp"
+          HostPort: 8080
+          Name: "container-incoming"
+      Family: "listener"
+      EphemeralStorage:
+        SizeInGiB: 21
+
