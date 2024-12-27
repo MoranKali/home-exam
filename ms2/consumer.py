@@ -3,6 +3,7 @@ import os
 import logging
 import string
 import random
+import time
 
 aws_access_key_id = os.environ["aws_access_key"]
 aws_secret_access_key = os.environ["secret_access_key"]
@@ -29,6 +30,7 @@ def process_message(message_body):
 
 if __name__ == "__main__":
     while True:
+        time.sleep(5)
         messages = sqs_queue.receive_messages()
         for message in messages:
             process_message(message.body)
