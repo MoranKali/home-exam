@@ -1,0 +1,59 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  This template creates an ALB and a target group.
+Resources:
+  alb2:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      EnablePrefixForIpv6SourceNat: "off"
+      IpAddressType: "ipv4"
+      Name: "alb2"
+      Scheme: "internet-facing"
+      SecurityGroups: 
+        - "sg-092315a6345def03e"
+        - "sg-0ce55b13a80757a16"
+      Subnets: 
+        - "subnet-0a83f151aa17679b3"
+        - "subnet-043af4934a37aaf5a"
+      Type: "application"
+  TargetGroup2:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckEnabled: true
+      HealthCheckIntervalSeconds: "5"
+      HealthCheckPath: "/health"
+      HealthCheckPort: "8080"
+      HealthCheckProtocol: "HTTP"
+      HealthCheckTimeoutSeconds: "2"
+      HealthyThresholdCount: "2"
+      IpAddressType: "ipv4"
+      Matcher:
+        HttpCode: "200"
+      Name: "targetgroup2"
+      Port: "8080"
+      Protocol: "HTTP"
+      TargetType: "ip"
+      UnhealthyThresholdCount: 5
+      VpcId: "vpc-08bab8ed14675fecf"
+  Listeners2:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions: 
+      - TargetGroupArn:
+        Ref: "TargetGroup2"
+      Type: "forward"
+      ForwardConfig:
+        TargetGroupStickinessConfig:
+          Enabled: false
+        TargetGroups:
+        - TargetGroupArn:
+            Ref: "TargetGroup2"
+          Weight: 1
+      ListenerAttributes: 
+        - ListenerAttribute
+      LoadBalancerArn: String
+      MutualAuthentication: 
+        MutualAuthentication
+      Port: Integer
+      Protocol: String
+      SslPolicy: String

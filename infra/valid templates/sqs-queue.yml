@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  This template creates an SQS queue.
+  
+Resources:
+  LogicalID:
+    Type: AWS::SQS::Queue
+    Properties:
+      DelaySeconds: 0
+      MaximumMessageSize: 262144
+      MessageRetentionPeriod: 345600
+      QueueName: "StandardQueue"
+      ReceiveMessageWaitTimeSeconds: 0
+      SqsManagedSseEnabled: false
+      VisibilityTimeout: 30

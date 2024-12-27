@@ -17,6 +17,9 @@ The two json files in infra are used by the CI/CD, which I used GitHub Actions f
 * ecr-from-scratch-ms2.yml
 * ecs-cluster.yml
 * s3-bucket.yml
+* sqs-queue.yml
+
+missing templates for the sevices, taskDefinitions, and ALB.
 
 
 ## To reproduce my solution
