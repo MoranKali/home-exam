@@ -32,4 +32,4 @@ if __name__ == "__main__":
         messages = sqs_queue.receive_messages()
         for message in messages:
             process_message(message.body)
-            # message.delete()
+            message.delete()
