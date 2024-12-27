@@ -11,7 +11,9 @@ I did get everything else though. And I would've had time to add monitoring too,
 See live demo on **"Well it works on my machine.7z"**.
 
 The two json files in infra are used by the CI/CD, which I used GitHub Actions for.
+
 CF templates that should work
+
 * ecr-from-scratch-ms1.yml
 * ecr-from-scratch-ms2.yml
 * ecs-cluster.yml
