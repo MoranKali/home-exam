@@ -1,7 +1,8 @@
 import boto3
 import os
 import logging
-import time
+import string
+import random
 
 aws_access_key_id = os.environ["aws_access_key"]
 aws_secret_access_key = os.environ["secret_access_key"]
@@ -15,10 +16,14 @@ sqs_queue = sqs.get_queue_by_name(QueueName="StandardQueue")
 
 logger = logging.getLogger(__name__)
 
+# generate a random id for the message
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
 def process_message(message_body):
     print(f"processing message: {message_body}")
     # do what you want with the message here
-    s3.Object(bucket_name, time.time).put(Body=message_body)
+    s3.Object(bucket_name, id_generator(6)).put(Body=message_body)
     logger.warning("Message processed: %s", message_body)
     pass
 
